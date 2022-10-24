@@ -36,53 +36,31 @@
                     <c:if test="${ginfo.ginfoType eq '1' and ginfo.dataBillstate eq 7 and msgMap1[ginfo.glistTempbatch] eq 0 }">
                         <c:if test="${ginfo.ginfoLnum eq 1 or ginfo.ginfoLnum eq 0}">
                             <!--苏豪前台标记已缴保证金费用 -->
-                            <c:if test="${priceSetMoneyFlagMap[ginfo.glistTempbatch] eq 1 }">
+                            <c:if test="${priceSetMoneyFlagMap[ginfo.glistTempbatch] eq '1' }">
                                 <a href="${ctx }/buyTenderConfirmAction.htm?glistTempbatch=${ginfo.glistTempbatch}">我要报价</a></c:if>
                             <!--苏豪未标记已缴保证金 并且也该供应商也没有保证金 -->
-                            <c:if test="${priceSetMoneyFlagMap[ginfo.glistTempbatch] eq 0 or priceSetMoneyFlagMap[ginfo.glistTempbatch] == null}">
-                                <c:if test="${queryReDeposit == null and ginfo.ginfoErate ne 0}">
-                                    <a href="javascript:;" onclick="goBack();">我要报价</a></c:if>
-                                <c:if test="${queryReDeposit == null and ginfo.ginfoErate eq 0}">
+                            <c:if test="${priceSetMoneyFlagMap[ginfo.glistTempbatch] eq '0'}">
+                                <c:if test="${ginfo.ginfoErate eq 0}">
                                     <a href="${ctx }/buyTenderConfirmAction.htm?glistTempbatch=${ginfo.glistTempbatch}">我要报价</a></c:if>
-                                <c:if test="${queryReDeposit != null and depositmap[ginfo.memberCode] == null and ginfo.ginfoErate eq 0}">
-                                    <a href="${ctx }/buyTenderConfirmAction.htm?glistTempbatch=${ginfo.glistTempbatch}">我要报价</a></c:if>
-                                <c:if test="${queryReDeposit != null and depositmap.size eq 0 and ginfo.ginfoErate ne 0}">
-                                    <a href="javascript:;" onclick="goBack();">我要报价</a></c:if>
-                                <c:if test="${depositmap.size eq 0 and ginfo.ginfoErate eq 0}">
-                                    <a href="${ctx }/buyTenderConfirmAction.htm?glistTempbatch=${ginfo.glistTempbatch}">我要报价</a></c:if>
-                                <c:if test="${depositmap.size ne 0 and depositmap[ginfo.memberCode] == null and ginfo.ginfoErate ne 0}">
-                                    <a href="javascript:;" onclick="goBack();">我要报价</a></c:if>
-                                <c:if test="${depositmap[ginfo.memberCode] != null}">
+                                <c:if test="${ginfo.ginfoErate ne 0}">
                                     <c:if test="${ginfo.ginfoErate gt depositmap[ginfo.memberCode].depositMoney or (depositmap[ginfo.memberCode].depositMoney==null and ginfo.ginfoErate gt 0 )}">
                                         <a href="javascript:;" onclick="goBack();">我要报价</a></c:if>
-                                    <c:if test="${ginfo.ginfoErate lt depositmap[ginfo.memberCode].depositMoney or ginfo.ginfoErate eq depositmap[ginfo.memberCode].depositMoney or (depositmap[ginfo.memberCode].depositMoney==null and ginfo.ginfoErate eq 0 )}">
+                                    <c:if test="${ginfo.ginfoErate lt depositmap[ginfo.memberCode].depositMoney or (depositmap[ginfo.memberCode].depositMoney==null and ginfo.ginfoErate eq 0 ) or ginfo.ginfoErate eq depositmap[ginfo.memberCode].depositMoney}">
                                         <a href="${ctx }/buyTenderConfirmAction.htm?glistTempbatch=${ginfo.glistTempbatch}">我要报价</a></c:if>
                                 </c:if>
                             </c:if>
                         </c:if>
                         <c:if test="${ginfo.ginfoLnum ne 1 and ginfo.ginfoLnum ne 0}">
-                            <c:if test="${priceSetMoneyFlagMap[ginfo.glistTempbatch] eq 1 }">
+                            <c:if test="${priceSetMoneyFlagMap[ginfo.glistTempbatch] eq '1' }">
                                 <a href="${ctx }/tenderQuotationAction.htm?glistTempbatch=${ginfo.glistTempbatch}&saveIp=1">我要报价</a></c:if>
-                            <c:if test="${priceSetMoneyFlagMap[ginfo.glistTempbatch] eq 0 or priceSetMoneyFlagMap[ginfo.glistTempbatch] == null}">
-                                <c:if test="${queryReDeposit == null and ginfo.ginfoErate ne 0}">
-                                    <a href="javascript:;" onclick="goBack();">我要报价</a></c:if>
-                                <c:if test="${queryReDeposit == null  and ginfo.ginfoErate eq 0}">
-                                    <a href="${ctx }/tenderQuotationAction.htm?glistTempbatch=${ginfo.glistTempbatch}&saveIp=1">我要报价</a></c:if>
-                                <c:if test="${queryReDeposit != null and depositmap[ginfo.memberCode] == null and ginfo.ginfoErate eq 0}">
-                                    <a href="${ctx }/tenderQuotationAction.htm?glistTempbatch=${ginfo.glistTempbatch}&saveIp=1">我要报价</a></c:if>
-                                <c:if test="${queryReDeposit != null and depositmap.size eq 0 and ginfo.ginfoErate ne 0}">
-                                    <a href="javascript:;" onclick="goBack();">我要报价</a></c:if>
-                                <c:if test="${depositmap.size eq 0 and ginfo.ginfoErate eq 0}">
-                                    <a href="${ctx }/tenderQuotationAction.htm?glistTempbatch=${ginfo.glistTempbatch}&saveIp=1">我要报价</a></c:if>
-                                <c:if test="${depositmap.size ne 0 and depositmap[ginfo.memberCode] == null and ginfo.ginfoErate ne 0}">
-                                    <a href="javascript:;" onclick="goBack();">我要报价</a></c:if>
-                                <c:if test="${depositmap[ginfo.memberCode] != null}">
-                                    <c:if test="${ginfo.ginfoErate gt depositmap[ginfo.memberCode].depositMoney
-                          or (depositmap[ginfo.memberCode].depositMoney==null and ginfo.ginfoErate gt 0 )}">
+                            <c:if test="${priceSetMoneyFlagMap[ginfo.glistTempbatch] eq '0' }">
+                                <c:if test="${ginfo.ginfoErate eq 0}">
+                                    <a href="${ctx }/tenderQuotationAction.htm?glistTempbatch=${ginfo.glistTempbatch}&saveIp=1">我要报价</a>
+                                </c:if>
+                                <c:if test="${ginfo.ginfoErate ne 0}">
+                                    <c:if test="${ginfo.ginfoErate gt depositmap[ginfo.memberCode].depositMoney or (depositmap[ginfo.memberCode].depositMoney==null and ginfo.ginfoErate gt 0 )}">
                                         <a href="javascript:;" onclick="goBack();">我要报价</a></c:if>
-                                    <c:if test="${ginfo.ginfoErate lt depositmap[ginfo.memberCode].depositMoney
-                          or ginfo.ginfoErate eq depositmap[ginfo.memberCode].depositMoney
-                          or (depositmap[ginfo.memberCode].depositMoney==null and ginfo.ginfoErate eq 0 )}">
+                                    <c:if test="${ginfo.ginfoErate lt depositmap[ginfo.memberCode].depositMoney or (depositmap[ginfo.memberCode].depositMoney==null and ginfo.ginfoErate eq 0 ) or ginfo.ginfoErate eq depositmap[ginfo.memberCode].depositMoney}">
                                         <a href="${ctx }/tenderQuotationAction.htm?glistTempbatch=${ginfo.glistTempbatch}&saveIp=1">我要报价</a></c:if>
                                 </c:if>
                             </c:if>
@@ -99,7 +77,7 @@
                     <c:if test="${ginfo.ginfoType eq '1' and ginfo.dataBillstate eq 10 }">
                         <a href="${ctx }/cgzbTenderAction.htm?glistTempbatch=${ginfo.glistTempbatch}">中标情况</a></c:if>
 
-
+                    <!--公开招标 （不一定准确） -->
                     <c:if test="${ginfo.ginfoType eq '0' and ginfo.dataBillstate eq 7 and msgMap1[ginfo.glistTempbatch] eq 0 }">
                         <c:if test="${ginfo.ginfoLnum eq 1 or ginfo.ginfoLnum eq 0}">
                             <c:if test="${priceSetMoneyFlagMap[ginfo.glistTempbatch] eq 1 }">
@@ -162,6 +140,9 @@
                         <a href="${ctx }/cgckTender2Action.htm?ginfoBillno=${ginfo.ginfoBillno}&ginfoLnum=${ginfo.ginfoLnum}">查看报价</a></c:if>
                     <c:if test="${ginfo.ginfoType eq '0' and ginfo.dataBillstate eq 10 }">
                         <a href="${ctx }/cgzbTenderAction.htm?glistTempbatch=${ginfo.glistTempbatch}">中标情况</a></c:if>
+
+
+                    <!--项目招标 -->
                     <c:if test="${ginfo.ginfoType eq '3' and ginfo.dataBillstate eq 7 and msgMap1[ginfo.glistTempbatch] eq 0 }">
                         <c:if test="${ginfo.ginfoLnum eq 1 or ginfo.ginfoLnum eq 0}">
                             <c:if test="${priceSetMoneyFlagMap[ginfo.glistTempbatch] eq 1 }">
@@ -225,8 +206,9 @@
                         <a href="${ctx }/xmckTender2Action.htm?ginfoBillno=${ginfo.ginfoBillno}&ginfoLnum=${ginfo.ginfoLnum}">查看项目报价</a></c:if>
                     <c:if test="${ginfo.ginfoType eq '3' and ginfo.dataBillstate eq 10 }">
                         <a href="${ctx }/xmzbTenderAction.htm?glistTempbatch=${ginfo.glistTempbatch}">中标情况</a></c:if>
-                    <c:if test="${ginfo.ginfoType eq '4' and ginfo.dataBillstate eq 10 }">
-                        <a href="${ctx }/xszbTenderAction.htm?glistTempbatch=${ginfo.glistTempbatch}">中标情况</a></c:if>
+
+
+                    <!--竞价招标 （不一定准确）-->
                     <c:if test="${ginfo.ginfoType eq '2' and ( ginfo.ginfoLnum eq 1 or ginfo.ginfoLnum eq 0 )and ginfo.dataBillstate eq 7 and msgMap1[ginfo.glistTempbatch] eq 0 }">
                         <c:if test="${priceSetMoneyFlagMap[ginfo.glistTempbatch] eq 1 }">
                             <a href="${ctx }/jjTenderConfirmAction.htm?glistTempbatch=${ginfo.glistTempbatch}">我要报价</a></c:if>
@@ -257,6 +239,7 @@
                         <a href="${ctx }/cgckTender2Action.htm?ginfoBillno=${ginfo.ginfoBillno}&ginfoLnum=${ginfo.ginfoLnum}">查看报价</a></c:if>
                     <c:if test="${ginfo.ginfoType eq '2' and ginfo.dataBillstate eq 10 }">
                         <a href="${ctx }/cgzbTenderAction.htm?glistTempbatch=${ginfo.glistTempbatch}">中标情况</a></c:if>
+                    <!--销售招标 -->
                     <c:if test="${ginfo.ginfoType eq '4' and ginfo.dataBillstate eq 7 and msgMap1[ginfo.glistTempbatch] eq 0 }">
                         <c:if test="${ginfo.ginfoLnum eq 1 or ginfo.ginfoLnum eq 0}">
                             <c:if test="${priceSetMoneyFlagMap[ginfo.glistTempbatch] eq 1 }">
@@ -311,30 +294,33 @@
                         <a href="${ctx }/fcpQuotationNextAction.htm?glistTempbatch=${ginfo.glistTempbatch}">重新报价</a></c:if>
                     <c:if test="${ginfo.ginfoType eq '4' and (ginfo.dataBillstate eq 8 or ginfo.dataBillstate eq 28) and msgMap1[ginfo.glistTempbatch] eq 1 }">
                         <a href="${ctx }/cgckFcpAction.htm?ginfoBillno=${ginfo.ginfoBillno}&ginfoLnum=${ginfo.ginfoLnum}">查看报价</a></c:if>
-                    <c:if test="${ginfo.ginfoType eq '10' and ( ginfo.ginfoLnum eq 1 or ginfo.ginfoLnum eq 0 )and ginfo.dataBillstate eq 7 and msgMap1[ginfo.glistTempbatch] eq 0 }">
-                        <c:if test="${priceSetMoneyFlagMap[ginfo.glistTempbatch] eq 1 }">
-                            <a href="${ctx }/gkjjmTenderAction.htm?glistTempbatch=${ginfo.glistTempbatch}&saveIp=1">我要报价</a></c:if>
-                        <c:if test="${priceSetMoneyFlagMap[ginfo.glistTempbatch] eq 0 or priceSetMoneyFlagMap[ginfo.glistTempbatch] == null}">
-                            <c:if test="${queryReDeposit == null and ginfo.ginfoErate ne 0}">
-                                <a href="javascript:;" onclick="goBack();">我要报价</a></c:if>
-                            <c:if test="${(queryReDeposit == null) and ginfo.ginfoErate eq 0}">
+                    <c:if test="${ginfo.ginfoType eq '4' and ginfo.dataBillstate eq 10 }">
+                        <a href="${ctx }/xszbTenderAction.htm?glistTempbatch=${ginfo.glistTempbatch}">中标情况</a></c:if>
+
+                    <!--不知什么标书 -->
+                    <c:if test="${ginfo.ginfoType eq '10' and ginfo.dataBillstate eq 7 and msgMap1[ginfo.glistTempbatch] eq 0 }">
+                        <c:if test="${ginfo.ginfoLnum eq 1 or ginfo.ginfoLnum eq 0}">
+                            <c:if test="${priceSetMoneyFlagMap[ginfo.glistTempbatch] eq 1 }">
                                 <a href="${ctx }/gkjjmTenderAction.htm?glistTempbatch=${ginfo.glistTempbatch}&saveIp=1">我要报价</a></c:if>
-                            <c:if test="${(queryReDeposit != null and depositmap[ginfo.memberCode] == null) and ginfo.ginfoErate eq 0}">
-                                <a href="${ctx }/gkjjmTenderAction.htm?glistTempbatch=${ginfo.glistTempbatch}&saveIp=1">我要报价</a></c:if>
-                            <c:if test="${queryReDeposit != null and depositmap.size eq 0 and ginfo.ginfoErate ne 0}">
-                                <a href="javascript:;" onclick="goBack();">我要报价</a></c:if>
-                            <c:if test="${depositmap.size eq 0 and ginfo.ginfoErate eq 0}">
-                                <a href="${ctx }/gkjjmTenderAction.htm?glistTempbatch=${ginfo.glistTempbatch}&saveIp=1">我要报价</a></c:if>
-                            <c:if test="${depositmap.size ne 0 and depositmap[ginfo.memberCode] == null and ginfo.ginfoErate ne 0}">
-                                <a href="javascript:;" onclick="goBack();">我要报价</a></c:if>
-                            <c:if test="${depositmap[ginfo.memberCode] != null}">
-                                <c:if test="${ginfo.ginfoErate gt depositmap[ginfo.memberCode].depositMoney
-                        or (depositmap[ginfo.memberCode].depositMoney==null and ginfo.ginfoErate gt 0 )}">
+                            <c:if test="${priceSetMoneyFlagMap[ginfo.glistTempbatch] eq 0 or priceSetMoneyFlagMap[ginfo.glistTempbatch] == null}">
+                                <c:if test="${queryReDeposit == null and ginfo.ginfoErate ne 0}">
                                     <a href="javascript:;" onclick="goBack();">我要报价</a></c:if>
-                                <c:if test="${ginfo.ginfoErate lt depositmap[ginfo.memberCode].depositMoney
-                        or ginfo.ginfoErate eq depositmap[ginfo.memberCode].depositMoney
-                        or (depositmap[ginfo.memberCode].depositMoney==null and ginfo.ginfoErate eq 0 )}">
+                                <c:if test="${(queryReDeposit == null) and ginfo.ginfoErate eq 0}">
                                     <a href="${ctx }/gkjjmTenderAction.htm?glistTempbatch=${ginfo.glistTempbatch}&saveIp=1">我要报价</a></c:if>
+                                <c:if test="${(queryReDeposit != null and depositmap[ginfo.memberCode] == null) and ginfo.ginfoErate eq 0}">
+                                    <a href="${ctx }/gkjjmTenderAction.htm?glistTempbatch=${ginfo.glistTempbatch}&saveIp=1">我要报价</a></c:if>
+                                <c:if test="${queryReDeposit != null and depositmap.size eq 0 and ginfo.ginfoErate ne 0}">
+                                    <a href="javascript:;" onclick="goBack();">我要报价</a></c:if>
+                                <c:if test="${depositmap.size eq 0 and ginfo.ginfoErate eq 0}">
+                                    <a href="${ctx }/gkjjmTenderAction.htm?glistTempbatch=${ginfo.glistTempbatch}&saveIp=1">我要报价</a></c:if>
+                                <c:if test="${depositmap.size ne 0 and depositmap[ginfo.memberCode] == null and ginfo.ginfoErate ne 0}">
+                                    <a href="javascript:;" onclick="goBack();">我要报价</a></c:if>
+                                <c:if test="${depositmap[ginfo.memberCode] != null}">
+                                    <c:if test="${ginfo.ginfoErate gt depositmap[ginfo.memberCode].depositMoney or (depositmap[ginfo.memberCode].depositMoney==null and ginfo.ginfoErate gt 0 )}">
+                                        <a href="javascript:;" onclick="goBack();">我要报价</a></c:if>
+                                    <c:if test="${ginfo.ginfoErate lt depositmap[ginfo.memberCode].depositMoney or ginfo.ginfoErate eq depositmap[ginfo.memberCode].depositMoney or (depositmap[ginfo.memberCode].depositMoney==null and ginfo.ginfoErate eq 0 )}">
+                                        <a href="${ctx }/gkjjmTenderAction.htm?glistTempbatch=${ginfo.glistTempbatch}&saveIp=1">我要报价</a></c:if>
+                                </c:if>
                             </c:if>
                         </c:if>
                         <a id="title" href="javascript:;" onClick="dlg =new Dialog({type:'url',value:('cqAfficheAction!getCqAffiche.htm?glistTempbatch=${ginfo.glistTempbatch}')},{id:'content-display',draggable:false,title:'澄清公告',subtitle:'',height:540});dlg.show();">澄清公告</a></c:if>
@@ -344,6 +330,8 @@
                         <a href="${ctx }/cgckTender2Action.htm?ginfoBillno=${ginfo.ginfoBillno}&ginfoLnum=${ginfo.ginfoLnum}">查看报价</a></c:if>
                     <c:if test="${ginfo.ginfoType eq '10' and ginfo.dataBillstate eq 10 }">
                         <a href="${ctx }/cgzbTenderAction.htm?glistTempbatch=${ginfo.glistTempbatch}">中标情况</a></c:if>
+
+                    <!--国贸设备招标 -->
                     <c:if test="${(ginfo.ginfoType eq '5'  or ginfo.ginfoType eq '8' or ginfo.ginfoType eq '9' ) and ginfo.dataBillstate eq 7 and msgMap1[ginfo.glistTempbatch] eq 0 }">
                         <c:if test="${ginfo.ginfoLnum eq 1 or ginfo.ginfoLnum eq 0}">
                             <c:if test="${priceSetMoneyFlagMap[ginfo.glistTempbatch] eq 1 }">
@@ -362,12 +350,9 @@
                                 <c:if test="${depositmap.size ne 0 and depositmap[ginfo.memberCode] == null and ginfo.ginfoErate ne 0}">
                                     <a href="javascript:;" onclick="goBack();">我要报价</a></c:if>
                                 <c:if test="${depositmap[ginfo.memberCode] != null}">
-                                    <c:if test="${ginfo.ginfoErate gt depositmap[ginfo.memberCode].depositMoney
-                          or (depositmap[ginfo.memberCode].depositMoney==null and ginfo.ginfoErate gt 0 )}">
+                                    <c:if test="${ginfo.ginfoErate gt depositmap[ginfo.memberCode].depositMoney or (depositmap[ginfo.memberCode].depositMoney==null and ginfo.ginfoErate gt 0 )}">
                                         <a href="javascript:;" onclick="goBack();">我要报价</a></c:if>
-                                    <c:if test="${ginfo.ginfoErate lt depositmap[ginfo.memberCode].depositMoney
-                          or ginfo.ginfoErate eq depositmap[ginfo.memberCode].depositMoney
-                          or (depositmap[ginfo.memberCode].depositMoney==null and ginfo.ginfoErate eq 0 )}">
+                                    <c:if test="${ginfo.ginfoErate lt depositmap[ginfo.memberCode].depositMoney or (depositmap[ginfo.memberCode].depositMoney==null and ginfo.ginfoErate eq 0 )}">
                                         <a href="${ctx }/gmTenderConfirmAction.htm?glistTempbatch=${ginfo.glistTempbatch}" target="_blank">我要报价</a></c:if>
                                 </c:if>
                             </c:if>
@@ -431,10 +416,8 @@
                             </c:if>
                         </c:if>
                         <a id="title" href="javascript:;" onClick="dlg =new Dialog({type:'url',value:('cqAfficheAction!getCqAffiche.htm?glistTempbatch=${ginfo.glistTempbatch}')},{id:'content-display',draggable:false,title:'澄清公告',subtitle:'',height:540});dlg.show();">澄清公告</a></c:if>
-                    <c:if test="${(ginfo.ginfoType eq '5') and ginfo.dataBillstate eq 7 and msgMap1[ginfo.glistTempbatch] eq 1 }">
+                    <c:if test="${(ginfo.ginfoType eq '5'  or ginfo.ginfoType eq '8' or ginfo.ginfoType eq '9' ) and ginfo.dataBillstate eq 7 and msgMap1[ginfo.glistTempbatch] eq 1 }">
                         <a href="${ctx }/gmsQuotationNextAction.htm?glistTempbatch=${ginfo.glistTempbatch}" target="_blank">重新报价</a></c:if>
-                    <c:if test="${(ginfo.ginfoType eq '8' or ginfo.ginfoType eq '9' ) and ginfo.dataBillstate eq 7 and msgMap1[ginfo.glistTempbatch] eq 1 }">
-                        <a href="${ctx }/gmQuotationNextAction.htm?glistTempbatch=${ginfo.glistTempbatch}" target="_blank">重新报价</a></c:if>
                     <c:if test="${(ginfo.ginfoType eq '5'  or ginfo.ginfoType eq '8' or ginfo.ginfoType eq '9' ) and (ginfo.dataBillstate eq 8 or ginfo.dataBillstate eq 28) and msgMap1[ginfo.glistTempbatch] eq 1 }">
                         <a href="${ctx }/cgckTender2Action.htm?ginfoBillno=${ginfo.ginfoBillno}&ginfoLnum=${ginfo.ginfoLnum}">查看报价</a></c:if>
                     <c:if test="${(ginfo.ginfoType eq '5'  or ginfo.ginfoType eq '8' or ginfo.ginfoType eq '9' ) and ginfo.dataBillstate eq 10 }">
